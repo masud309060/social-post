@@ -25,12 +25,9 @@ const PostDetail = () => {
 
     const [user, setUser] = useState([]);
     useEffect(() => {
-        fetch(`https://randomuser.me/api/?results=5`)
+        fetch(`https://randomuser.me/api/?results=6`)
         .then(res => res.json())
-        .then(data => {
-            const newUser = [...user, data.results[0]]
-            setUser(newUser)
-        })
+        .then(data => setUser(data.results))
     },[]);
 
         const users = user.slice(0, comments.length)
@@ -46,8 +43,12 @@ const PostDetail = () => {
                 <p>Comment:</p>
 
                 {
-                 comments.map(data => 
-                 <Comment users={user} comments={data} key={data.id}></Comment>)
+                    comments.map((cm , index) => {
+                        const user = users[index]
+                        return(
+                            <Comment comments={cm} user={user} key={index} ></Comment>
+                        )
+                    })
                 }
         </div>
     );

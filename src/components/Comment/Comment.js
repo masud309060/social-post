@@ -3,17 +3,21 @@ import './Comment.css'
 
 const Comment = (props) => {
     const comments= props.comments;
-    const {name, body } = comments;
-    let users = props.users;
-    // const {thumbnail} = users.picture;
+    const users = props.user;
+    const {email, body } = comments;
     // console.log(users)
+
     return (
-        <div>          
-         <div style={{border: "1px solid pink", padding:"10px", borderRadius:"5px", marginTop: "5px"}}>    
-            <p style={{color: "blue"}}>{name}:</p>
-            <p>{body}</p>
-         </div>
-        </div>
+        
+            <div style={{border: "1px solid pink", padding:"10px", borderRadius:"5px", marginTop: "5px"}}>    
+                <div className='comment-title'>
+                    <img src={users? users.picture.thumbnail: ""} alt=""/>
+                    <p style={{color: "blue"}}>
+                        {users?users.name.title +" "+ users.name.first + " " +users.name.last :""} :</p>
+                </div>
+                <p>{body}</p>
+            </div>
+
     );
 };
 
